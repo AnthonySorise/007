@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import * as d3 from "d3";
+import gunBarrelBackground from '../assets/gun-barrel-background.png'
+import logo from '../assets/logo.png'
+import Card from '@material-ui/core/Card';
 
 const FilmPieChart = props => {
     const getChartData = () => {
         var chartData = [];
 
-        let selectedKey = props.selectedKeyValue.key;
-        let selectedValue = props.selectedKeyValue.value;
+        let selectedKey = props.selectedKeyValuePair.key;
+        let selectedValue = props.selectedKeyValuePair.value;
         if (!props.data || props.data.length == 0 || !selectedKey) {
             return [{label: "", value: ""}];
         }
@@ -38,16 +41,16 @@ const FilmPieChart = props => {
     }
 
     const getChartTitle = () =>{
-        if(props.selectedKeyValue.key == "SPECTRE"){
-            return "SPECTRE"
+        if(props.selectedKeyValuePair.key == "SPECTRE"){
+            return (props.selectedKeyValuePair.value == 1 ? "Has " : "Does not have ") + "SPECTRE"
         }
-        else if(props.selectedKeyValue.key == "ColdWar"){
-            return "Cold War"
+        else if(props.selectedKeyValuePair.key == "ColdWar"){
+            return (props.selectedKeyValuePair.value == 1 ? "Has " : "Does not have ") + "Cold War themes";
         }
-        else if(props.selectedKeyValue.key == "BondsWife"){
-            return "Bond's Wife"
+        else if(props.selectedKeyValuePair.key == "BondsWife"){
+            return (props.selectedKeyValuePair.value == 1 ? "References " : "Does not reference ") + "Bond's wife";
         }
-        else return props.selectedKeyValue.key + " - " + props.selectedKeyValue.value
+        else return props.selectedKeyValuePair.key + " - " + props.selectedKeyValuePair.value
     }
 
     const ref = useRef(null);
@@ -57,24 +60,37 @@ const FilmPieChart = props => {
         chartSection: {
             background:"black",
             height:"100vh",
-            '& h3': {
-                color: 'white',
-                margin: 0,
-                paddingTop:"1em",
-            },
+            backgroundImage: `url(${gunBarrelBackground})`,
+            backgroundPosition: "top",
         },
         chartContainer: {
-            display: props.selectedKeyValue.key ? "block" : "none",
+            display: props.selectedKeyValuePair.key ? "block" : "none",
             width: "100%",
             position:"relative",
             '& svg': {
                 position:"absolute",
-                left: "calc(50% - 100px)",
-                top: "24px",
+                left: "calc(50% - 102px)",
+                top: "220px",
             },
         },
-        chartH3: {
-            display: props.selectedKeyValue.key ? "block" : "none",
+        chartTitleCard: {
+            background: "black",
+        },
+        chartTitle: {
+            display: props.selectedKeyValuePair.key ? "block" : "none",
+            color: 'white',
+            margin: 0,
+            paddingTop:"0.5em",
+        },
+        logoContainer: {
+            position: "absolute",
+            bottom:"48px",
+            paddingLeft: "48px",
+            paddingRight: "48px",
+            '& img': {
+                maxWidth: "100%",
+            },
+            
         }
     });
 
@@ -131,18 +147,21 @@ const FilmPieChart = props => {
                 .attr("transform", d => `translate(${createArc.centroid(d)})`)
                 .tween("text", (d, i, nodes) => {
                     const interpolator = d3.interpolate(prevData[i], d);
-                    return t => d3.select(nodes[i]).text(format(interpolator(t).value));
+                    return t => d3.select(nodes[i]).text(format(interpolator(t).value) + " films");
                 });
 
             cache.current = getChartData();
         },
-        [props.selectedKeyValue]
+        [props.selectedKeyValuePair]
     );
 
     const classes = useStyles();
     return (
         <div className={classes.chartSection} m={0} p={0}>
-            <h3 className={classes.chartH3} align={"center"} m={0} p={0}>{getChartTitle()}</h3>
+            <Card className={classes.chartTitleCard}>
+                <h2 className={classes.chartTitle} align={"center"} m={0} p={0}>{getChartTitle()}</h2>
+            </Card>
+            
             <div className={classes.chartContainer} m={0} p={0}>
                 <svg align={"center"} height={200}>
                     <g
@@ -150,6 +169,10 @@ const FilmPieChart = props => {
                         transform={`translate(${props.outerRadius} ${props.outerRadius})`}
                     />
                 </svg>
+            </div>
+
+            <div className={classes.logoContainer}>
+                <img src={logo}/>
             </div>
         </div>
     );

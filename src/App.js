@@ -8,7 +8,7 @@ import './App.scss';
 function App() {
 
     const [data, setData] = useState([null]);
-    const [selectedKeyValue, setSelectedKeyValue] = useState({});
+    const [selectedKeyValuePair, setselectedKeyValuePair] = useState({});
   
     useEffect(() => {
         setData(bondData);
@@ -16,19 +16,19 @@ function App() {
 
     useEffect(() => {
 
-        console.log(selectedKeyValue);
+        console.log(selectedKeyValuePair);
             
 
-    }, [selectedKeyValue])
+    }, [selectedKeyValuePair])
 
     return (
         <div className="App">
             <Grid container>
                 <Grid item sm={12} md={9}>
-                    <FilmTable data={data} selectedKeyValue={selectedKeyValue} setSelectedKeyValue={setSelectedKeyValue} />
+                    <FilmTable data={data} selectedKeyValuePair={selectedKeyValuePair} setselectedKeyValuePair={setselectedKeyValuePair} />
                 </Grid>
                 <Grid item sm={12} md={3}>
-                    <FilmPieChart data={data} selectedKeyValue={selectedKeyValue} width={"50vw"} height={"50vw"} innerRadius={60} outerRadius={100}/>
+                    <FilmPieChart data={data} selectedKeyValuePair={selectedKeyValuePair} width={"50vw"} height={"50vw"} innerRadius={60} outerRadius={100}/>
                 </Grid>
             </Grid>
         </div>

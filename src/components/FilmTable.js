@@ -15,6 +15,17 @@ function FilmTable(props) {
     const useStyles = makeStyles({
         tableContainer: {
             height: '100vh',
+            '&::-webkit-scrollbar': {
+              width: '0.4em'
+            },
+            '&::-webkit-scrollbar-track': {
+              boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+              webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)'
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: '#6c7a86',
+              outline: '2px solid #6c7a86',
+            }
         },
         tableLabel: {
             fontWeight: 'bold',
@@ -35,7 +46,7 @@ function FilmTable(props) {
             '&:hover': {
                 background: '#f9ebce',
                 color: 'black',
-             },
+            },
         },
         icon: {
             pointerEvents: 'none',
@@ -47,7 +58,7 @@ function FilmTable(props) {
 
         let key = tableCell.getAttribute("datakey");
         let value = tableCell.getAttribute("datavalue");
-        props.setSelectedKeyValue({key, value});
+        props.setselectedKeyValuePair({ key, value });
 
         let index = tableCell.getAttribute("index");
         setSelectedColumn(index);
@@ -55,8 +66,8 @@ function FilmTable(props) {
 
     const isSelectedRow = (iRow) => {
         let thisRowsData = props.data[iRow];
-        let selectedKey = props.selectedKeyValue.key;
-        let selectedValue = props.selectedKeyValue.value;
+        let selectedKey = props.selectedKeyValuePair.key;
+        let selectedValue = props.selectedKeyValuePair.value;
 
         return thisRowsData && thisRowsData.hasOwnProperty(selectedKey) && thisRowsData[selectedKey] == selectedValue;
     }
@@ -81,82 +92,82 @@ function FilmTable(props) {
                 </TableHead>
                 <TableBody>
                     {props.data.map((row, i) => (
-                        <TableRow key={i} className={isSelectedRow(i) ? classes.selectedRow : "" }>
-                            <TableCell className={classes.tableData} align="center" 
-                            index="0"
-                            datakey="Title" 
-                            datavalue={row && row.Title ? row.Title : ""} 
-                            onClick={handleSelectTableCell}>
+                        <TableRow key={i} className={isSelectedRow(i) ? classes.selectedRow : ""}>
+                            <TableCell className={classes.tableData} align="center"
+                                index="0"
+                                datakey="Title"
+                                datavalue={row && row.Title ? row.Title : ""}
+                                onClick={handleSelectTableCell}>
                                 {row && row.Title ? row.Title : ""}
                             </TableCell>
-                            <TableCell className={classes.tableData} align="center" 
-                            index="1"
-                            datakey="Year" 
-                            datavalue={row && row.Year ? row.Year : ""} 
-                            onClick={handleSelectTableCell}>
+                            <TableCell className={classes.tableData} align="center"
+                                index="1"
+                                datakey="Year"
+                                datavalue={row && row.Year ? row.Year : ""}
+                                onClick={handleSelectTableCell}>
                                 {row && row.Year ? row.Year : ""}
                             </TableCell>
-                            <TableCell className={classes.tableData} align="center" 
-                            index="2"
-                            datakey="Bond" 
-                            datavalue={row && row.Bond ? row.Bond : ""} 
-                            onClick={handleSelectTableCell}>
+                            <TableCell className={classes.tableData} align="center"
+                                index="2"
+                                datakey="Bond"
+                                datavalue={row && row.Bond ? row.Bond : ""}
+                                onClick={handleSelectTableCell}>
                                 {row && row.Bond ? row.Bond : ""}
                             </TableCell>
-                            <TableCell className={classes.tableData} align="center" 
-                            index="3"
-                            datakey="M" 
-                            datavalue={row && row.M ? row.M : ""} 
-                            onClick={handleSelectTableCell}>
+                            <TableCell className={classes.tableData} align="center"
+                                index="3"
+                                datakey="M"
+                                datavalue={row && row.M ? row.M : ""}
+                                onClick={handleSelectTableCell}>
                                 {row && row.M ? row.M : ""}
                             </TableCell>
-                            <TableCell className={classes.tableData} align="center" 
-                            index="4"
-                            datakey="MoneyPenny" 
-                            datavalue={row && row.MoneyPenny ? row.MoneyPenny : ""} 
-                            onClick={handleSelectTableCell}>
+                            <TableCell className={classes.tableData} align="center"
+                                index="4"
+                                datakey="MoneyPenny"
+                                datavalue={row && row.MoneyPenny ? row.MoneyPenny : ""}
+                                onClick={handleSelectTableCell}>
                                 {row && row.MoneyPenny ? row.MoneyPenny : ""}
                             </TableCell>
-                            <TableCell className={classes.tableData} align="center" 
-                            index="5"
-                            datakey="Q" 
-                            datavalue={row && row.Q ? row.Q : ""} 
-                            onClick={handleSelectTableCell}>
+                            <TableCell className={classes.tableData} align="center"
+                                index="5"
+                                datakey="Q"
+                                datavalue={row && row.Q ? row.Q : ""}
+                                onClick={handleSelectTableCell}>
                                 {row && row.Q ? row.Q : ""}
                             </TableCell>
-                            <TableCell className={classes.tableData} align="center" 
-                            index="6"
-                            datakey="Director" 
-                            datavalue={row && row.Director ? row.Director : ""} 
-                            onClick={handleSelectTableCell}>
+                            <TableCell className={classes.tableData} align="center"
+                                index="6"
+                                datakey="Director"
+                                datavalue={row && row.Director ? row.Director : ""}
+                                onClick={handleSelectTableCell}>
                                 {row && row.Director ? row.Director : ""}
                             </TableCell>
-                            <TableCell className={classes.tableData} align="center" 
-                            index="7"
-                            datakey="SPECTRE" 
-                            datavalue={row && row.SPECTRE ? row.SPECTRE : ""} 
-                            onClick={handleSelectTableCell}>
-                                {row && row.SPECTRE == 1 ? 
-                                <CheckIcon className={classes.icon}/>
-                                : ""}
+                            <TableCell className={classes.tableData} align="center"
+                                index="7"
+                                datakey="SPECTRE"
+                                datavalue={row && row.SPECTRE ? row.SPECTRE : ""}
+                                onClick={handleSelectTableCell}>
+                                {row && row.SPECTRE == 1 ?
+                                    <CheckIcon className={classes.icon} />
+                                    : ""}
                             </TableCell>
-                            <TableCell className={classes.tableData} align="center" 
-                            index="8"
-                            datakey="ColdWar" 
-                            datavalue={row && row.ColdWar ? row.ColdWar : ""} 
-                            onClick={handleSelectTableCell}>
-                                {row && row.ColdWar == 1 ? 
-                                <CheckIcon className={classes.icon}/>
-                                : ""}
+                            <TableCell className={classes.tableData} align="center"
+                                index="8"
+                                datakey="ColdWar"
+                                datavalue={row && row.ColdWar ? row.ColdWar : ""}
+                                onClick={handleSelectTableCell}>
+                                {row && row.ColdWar == 1 ?
+                                    <CheckIcon className={classes.icon} />
+                                    : ""}
                             </TableCell>
-                            <TableCell className={classes.tableData} align="center" 
-                            index="9"
-                            datakey="BondsWife" 
-                            datavalue={row && row.BondsWife ? row.BondsWife : ""} 
-                            onClick={handleSelectTableCell}>
-                                {row && row.BondsWife == 1 ? 
-                                <CheckIcon className={classes.icon}/>
-                                : ""}
+                            <TableCell className={classes.tableData} align="center"
+                                index="9"
+                                datakey="BondsWife"
+                                datavalue={row && row.BondsWife ? row.BondsWife : ""}
+                                onClick={handleSelectTableCell}>
+                                {row && row.BondsWife == 1 ?
+                                    <CheckIcon className={classes.icon} />
+                                    : ""}
                             </TableCell>
                         </TableRow>
                     ))}
