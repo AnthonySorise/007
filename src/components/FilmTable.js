@@ -90,43 +90,50 @@ function FilmTable(props) {
                             index="0"
                             datakey="Title" 
                             datavalue={row && row.Title ? row.Title : ""} 
-                            onClick={handleSelectTableCell}>{row && row.Title ? row.Title : ""}
+                            onClick={handleSelectTableCell}>
+                                {row && row.Title ? row.Title : ""}
                             </TableCell>
                             <TableCell className={classes.tableData} align="center" 
                             index="1"
                             datakey="Year" 
                             datavalue={row && row.Year ? row.Year : ""} 
-                            onClick={handleSelectTableCell}>{row && row.Year ? row.Year : ""}
+                            onClick={handleSelectTableCell}>
+                                {row && row.Year ? row.Year : ""}
                             </TableCell>
                             <TableCell className={classes.tableData} align="center" 
                             index="2"
                             datakey="Bond" 
                             datavalue={row && row.Bond ? row.Bond : ""} 
-                            onClick={handleSelectTableCell}>{row && row.Bond ? row.Bond : ""}
+                            onClick={handleSelectTableCell}>
+                                {row && row.Bond ? row.Bond : ""}
                             </TableCell>
                             <TableCell className={classes.tableData} align="center" 
                             index="3"
                             datakey="M" 
                             datavalue={row && row.M ? row.M : ""} 
-                            onClick={handleSelectTableCell}>{row && row.M ? row.M : ""}
+                            onClick={handleSelectTableCell}>
+                                {row && row.M ? row.M : ""}
                             </TableCell>
                             <TableCell className={classes.tableData} align="center" 
                             index="4"
                             datakey="MoneyPenny" 
                             datavalue={row && row.MoneyPenny ? row.MoneyPenny : ""} 
-                            onClick={handleSelectTableCell}>{row && row.MoneyPenny ? row.MoneyPenny : ""}
+                            onClick={handleSelectTableCell}>
+                                {row && row.MoneyPenny ? row.MoneyPenny : ""}
                             </TableCell>
                             <TableCell className={classes.tableData} align="center" 
                             index="5"
                             datakey="Q" 
                             datavalue={row && row.Q ? row.Q : ""} 
-                            onClick={handleSelectTableCell}>{row && row.Q ? row.Q : ""}
+                            onClick={handleSelectTableCell}>
+                                {row && row.Q ? row.Q : ""}
                             </TableCell>
                             <TableCell className={classes.tableData} align="center" 
                             index="6"
                             datakey="Director" 
                             datavalue={row && row.Director ? row.Director : ""} 
-                            onClick={handleSelectTableCell}>{row && row.Director ? row.Director : ""}
+                            onClick={handleSelectTableCell}>
+                                {row && row.Director ? row.Director : ""}
                             </TableCell>
                             <TableCell className={classes.tableData} align="center" 
                             index="7"
