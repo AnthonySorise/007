@@ -16,10 +16,6 @@ function FilmTable(props) {
         tableContainer: {
             height: '100vh',
         },
-        table: {
-            maxWidth: '75vw',
-
-        },
         tableLabel: {
             fontWeight: 'bold',
             background: 'black',
