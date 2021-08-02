@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import * as d3 from "d3";
+import Grid from "@material-ui/core/Grid";
+import Card from '@material-ui/core/Card';
 import gunBarrelBackground from '../assets/gun-barrel-background.png'
 import logo from '../assets/logo.png'
-import Card from '@material-ui/core/Card';
+
 
 const FilmPieChart = props => {
     const getChartData = () => {
@@ -56,8 +58,12 @@ const FilmPieChart = props => {
     const ref = useRef(null);
     const cache = useRef(getChartData());
 
+    const theme = useTheme();
     const useStyles = makeStyles({
         chartSection: {
+            [theme.breakpoints.down('sm')]: {
+                display:"none",
+            },
             background:"black",
             height:"100vh",
             backgroundImage: `url(${gunBarrelBackground})`,
@@ -79,6 +85,7 @@ const FilmPieChart = props => {
         chartTitle: {
             display: props.selectedKeyValuePair.key ? "block" : "none",
             color: 'white',
+            height: '32px',
             margin: 0,
             paddingTop:"0.5em",
         },
