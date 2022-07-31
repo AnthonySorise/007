@@ -3,6 +3,6 @@
 Tech Stack
   - React
   - D3
-  - Material UI
+  - MUI
 
 [Live Site](https://anthonysorise.com/007/)
